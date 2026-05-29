@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#10b981">
+    <title>Downloading... - Learnza E-Library</title>
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.29.0/dist/feather.min.js"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="./css/styles.css">
+
+    <!-- Libraries -->
+    <!-- JSZip for zipping files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <!-- FileSaver for saving files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+    <!-- Main Logic -->
+    <script type="module" src="./js/downloader.js"></script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="./" class="logo">
+                <img src="./assets/logo.svg" alt="Learnza">
+                <div class="logo-content">
+                    <span class="logo-title">Learnza</span>
+                    <span class="logo-subtitle">E-Library</span>
+                </div>
+            </a>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="downloader-container">
+            <div class="file-info">
+                <h1 class="file-title" id="fileTitle">Initializing...</h1>
+                <p class="file-subtitle">Your download will start shortly</p>
+            </div>
+
+            <div class="progress-circle-container">
+                <svg class="progress-svg" width="200" height="200">
+                    <circle class="progress-bg" cx="100" cy="100" r="90"></circle>
+                    <circle class="progress-bar" id="progressBar" cx="100" cy="100" r="90"></circle>
+                </svg>
+                <div class="progress-text">
+                    <span class="percentage" id="percentage">0%</span>
+                    <span class="status-text" id="statusText">Preparing</span>
+                </div>
+            </div>
+
+            <div class="download-stats" id="statsPanel">
+                <div class="stat-item">
+                    <span class="stat-label">Download Speed</span>
+                    <span class="stat-value" id="downloadSpeed">-- MB/s</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Time Remaining</span>
+                    <span class="stat-value" id="timeRemaining">-- s</span>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="btn btn-warning hidden" id="cancelBtn">
+                    <i data-feather="x"></i> Cancel Download
+                </button>
+                <a href="./" class="btn btn-outline hidden" id="backBtn">
+                    <i data-feather="arrow-left"></i> Back to Library
+                </a>
+                <button class="btn btn-danger hidden" id="retryBtn">
+                    <i data-feather="refresh-cw"></i> Retry Download
+                </button>
+            </div>
+
+            <div id="errorMsg" class="hidden" style="color: var(--danger); margin-top: 1rem;"></div>
+        </div>
+    </main>
+
+    <script>
+        feather.replace();
+    </script>
+</body>
+
+</html>

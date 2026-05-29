@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light only">
+    <meta name="theme-color" content="#10b981">
+    <title>Preview — Learnza E‑Library</title>
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/feather-icons@4.29.0/dist/feather.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.29.0/dist/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+
+    <link rel="stylesheet" href="./css/styles.css">
+    <script type="module" src="./js/preview.js" defer></script>
+</head>
+
+<body>
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p>Loading note...</p>
+    </div>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="./" class="logo">
+                <img src="./assets/logo.svg" alt="Learnza">
+                <div class="logo-content">
+                    <span class="logo-title">Learnza</span>
+                    <span class="logo-subtitle">E-Library</span>
+                </div>
+            </a>
+
+            <nav class="header-nav desktop-nav">
+                <a href="./" class="nav-link"><i data-feather="arrow-left"></i><span>Back to Library</span></a>
+            </nav>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+
+        <nav class="mobile-nav" id="mobileNav">
+            <div class="mobile-nav-content">
+                <a href="./" class="mobile-nav-item"><i data-feather="arrow-left"></i><span>Back to Library</span></a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <section id="previewContent" class="preview-section">
+                <!-- Error State -->
+                <div id="errorState" class="empty-state hidden">
+                    <div class="empty-icon">
+                        <i data-feather="alert-circle"></i>
+                    </div>
+                    <h3>Note not found</h3>
+                    <p>The requested note could not be found or is not available.</p>
+                    <a href="./" class="btn btn-success">
+                        <i data-feather="home"></i>
+                        Back to Library
+                    </a>
+                </div>
+
+                <!-- Note Preview -->
+                <div id="notePreview" class="hidden">
+                    <div class="preview-header card">
+                        <div class="preview-image" id="previewImage"></div>
+                        <div class="preview-info">
+                            <h1 id="noteTitle"></h1>
+                            <p id="noteDescription"></p>
+
+                            <div class="preview-meta">
+                                <span class="meta-item">
+                                    <i data-feather="bookmark"></i>
+                                    <span id="noteCategory"></span>
+                                </span>
+                                <span class="meta-item">
+                                    <i data-feather="eye"></i>
+                                    <span id="noteViews">0</span> views
+                                </span>
+                                <span class="meta-item">
+                                    <i data-feather="download"></i>
+                                    <span id="noteDownloads">0</span> downloads
+                                </span>
+                            </div>
+
+                            <div id="noteTags" class="note-tags-preview"></div>
+
+                            <div class="preview-actions">
+                                <button id="shareBtn" class="btn btn-outline btn-large">
+                                    <i data-feather="share-2"></i>
+                                    Share Note
+                                </button>
+                                <button id="downloadBtn" class="btn btn-success btn-large">
+                                    <i data-feather="download"></i>
+                                    Download Note
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="./assets/logo.svg" alt="Learnza">
+                        <span>Learnza E-Library</span>
+                    </div>
+                    <p>Your trusted digital learning companion for academic excellence.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="./">Library</a></li>
+                        <li><a href="./about.html">About</a></li>
+                        <li><a href="./contact.html">Contact</a></li>
+                        <li><a href="./privacy.html">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Learnza E-Library. All rights reserved.</p>
+                <p>Made with ❤️ by <a href="https://github.com/gohardev260">Gohar Rehman</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="toast" class="toast"></div>
+</body>
+
+</html>

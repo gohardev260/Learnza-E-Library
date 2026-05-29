@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light only">
+    <meta name="theme-color" content="#10b981">
+    <title>Admin Dashboard — Learnza E‑Library</title>
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/feather-icons@4.29.0/dist/feather.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.29.0/dist/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/admin.css">
+    <script type="module" src="./js/admin.js" defer></script>
+</head>
+
+<body>
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p>Loading dashboard...</p>
+    </div>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="./" class="logo">
+                <img src="./assets/logo.svg" alt="Learnza">
+                <div class="logo-content">
+                    <span class="logo-title">Learnza</span>
+                    <span class="logo-subtitle">Admin Panel</span>
+                </div>
+            </a>
+
+            <nav class="header-nav desktop-nav">
+                <button class="btn btn-danger hidden" id="logoutBtn">
+                    <i data-feather="log-out"></i>
+                    <span>Logout</span>
+                </button>
+            </nav>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+
+        <nav class="mobile-nav" id="mobileNav">
+            <div class="mobile-nav-content">
+                <button class="mobile-nav-item btn-style hidden" id="logoutBtnMobile">
+                    <i data-feather="log-out"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- Login Section -->
+        <section id="loginSection" class="login-section">
+            <div class="login-card card">
+                <div class="login-header">
+                    <div class="login-icon">
+                        <i data-feather="shield"></i>
+                    </div>
+                    <h2>Admin Access</h2>
+                    <p>Sign in to manage your digital library</p>
+                </div>
+
+                <form id="loginForm" class="login-form">
+                    <div class="form-group">
+                        <label for="email"><i data-feather="mail"></i> Email</label>
+                        <input type="email" id="email" required autocomplete="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password"><i data-feather="lock"></i> Password</label>
+                        <input type="password" id="password" required autocomplete="current-password">
+                    </div>
+
+                    <button type="submit" class="btn btn-success btn-large">
+                        <i data-feather="log-in"></i>
+                        Sign In
+                    </button>
+                </form>
+
+                <div id="loginMsg" class="login-message"></div>
+            </div>
+        </section>
+
+        <!-- Admin Panel -->
+        <section id="adminPanel" class="admin-panel hidden">
+            <!-- Dashboard Header -->
+            <div class="dashboard-header">
+                <h1>Dashboard</h1>
+                <p>Manage your digital library</p>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card card">
+                    <div class="stat-icon total">
+                        <i data-feather="file-text"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="statTotal">0</div>
+                        <div class="stat-label">Total Notes</div>
+                    </div>
+                </div>
+
+                <div class="stat-card card">
+                    <div class="stat-icon published">
+                        <i data-feather="check-circle"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="statPublished">0</div>
+                        <div class="stat-label">Published</div>
+                    </div>
+                </div>
+
+                <div class="stat-card card">
+                    <div class="stat-icon downloads">
+                        <i data-feather="download"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="statDownloads">0</div>
+                        <div class="stat-label">Downloads</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Note Management -->
+            <div class="management-section card">
+                <h2><i data-feather="edit"></i> Note Management</h2>
+
+                <form id="noteForm" class="note-form">
+                    <input type="hidden" id="noteId">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="title"><i data-feather="type"></i> Title *</label>
+                            <input type="text" id="title" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="category"><i data-feather="bookmark"></i> Category</label>
+                            <input type="text" id="category">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fileUrl"><i data-feather="link"></i> File URL</label>
+                        <input type="url" id="fileUrl" placeholder="https://...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tags"><i data-feather="tag"></i> Tags</label>
+                        <input type="text" id="tags" placeholder="Separate with commas">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description"><i data-feather="align-left"></i> Description</label>
+                        <textarea id="description" rows="4"></textarea>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="published">
+                            <span class="checkmark"></span>
+                            <span class="checkbox-text">
+                                <i data-feather="globe"></i>
+                                Publish this note
+                            </span>
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">
+                            <i data-feather="save"></i>
+                            Save Note
+                        </button>
+                        <button type="button" class="btn btn-outline" id="resetForm">
+                            <i data-feather="refresh-cw"></i>
+                            Reset
+                        </button>
+                        <button type="button" class="btn btn-danger" id="deleteNote" disabled>
+                            <i data-feather="trash-2"></i>
+                            Delete
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Notes Table -->
+            <div class="management-section card">
+                <h2><i data-feather="list"></i> Notes Library</h2>
+
+                <div class="table-controls">
+                    <div class="search-field">
+                        <i data-feather="search" class="search-icon"></i>
+                        <input type="text" id="adminSearch" placeholder="Search notes...">
+                    </div>
+
+                    <select id="filterPublished">
+                        <option value="">All Status</option>
+                        <option value="true">Published</option>
+                        <option value="false">Draft</option>
+                    </select>
+                </div>
+
+                <div class="table-container">
+                    <div id="notesTable" class="notes-table"></div>
+                </div>
+
+                <div id="adminPagination" class="pagination"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Learnza E-Library. All rights reserved.</p>
+                <p>Made with ❤️ by <a href="https://github.com/gohardev260">Gohar Rehman</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="toast" class="toast"></div>
+</body>
+
+</html>

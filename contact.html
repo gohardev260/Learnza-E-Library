@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light only">
+    <meta name="theme-color" content="#10b981">
+    <title>Contact Us — Learnza E‑Library</title>
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/feather-icons@4.29.0/dist/feather.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.29.0/dist/feather.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+
+    <link rel="stylesheet" href="./css/styles.css">
+    <script type="module" src="./js/utils.js" defer></script>
+    <script type="module" src="./js/contact.js" defer></script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="./" class="logo">
+                <img src="./assets/logo.svg" alt="Learnza">
+                <div class="logo-content">
+                    <span class="logo-title">Learnza</span>
+                    <span class="logo-subtitle">E-Library</span>
+                </div>
+            </a>
+
+            <nav class="header-nav desktop-nav">
+                <a href="./" class="nav-link"><i data-feather="home"></i><span>Library</span></a>
+                <a href="./about.html" class="nav-link"><i data-feather="info"></i><span>About</span></a>
+                <a href="./contact.html" class="nav-link active"><i data-feather="mail"></i><span>Contact</span></a>
+                <a href="./privacy.html" class="nav-link"><i data-feather="shield"></i><span>Privacy</span></a>
+            </nav>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+
+        <nav class="mobile-nav" id="mobileNav">
+            <div class="mobile-nav-content">
+                <a href="./" class="mobile-nav-item"><i data-feather="home"></i><span>Library</span></a>
+                <a href="./about.html" class="mobile-nav-item"><i data-feather="info"></i><span>About</span></a>
+                <a href="./contact.html" class="mobile-nav-item active"><i
+                        data-feather="mail"></i><span>Contact</span></a>
+                <a href="./privacy.html" class="mobile-nav-item"><i data-feather="shield"></i><span>Privacy</span></a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="container">
+                <div class="page-hero-content">
+                    <h1 class="page-title">Get in Touch</h1>
+                    <p class="page-subtitle">We'd love to hear from you</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <section class="contact-section">
+                <div class="contact-form-wrapper card">
+                    <h2>Send us a Message</h2>
+                    <form id="contactForm" class="contact-form" name="contact" method="POST" data-netlify="true"
+                        netlify-honeypot="bot-field">
+                        <!-- Hidden fields for Netlify -->
+                        <input type="hidden" name="form-name" value="contact" />
+
+                        <!-- Honeypot for spam prevention -->
+                        <p class="hidden">
+                            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                        </p>
+
+                        <div class="form-group">
+                            <label for="name"><i data-feather="user"></i> Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email"><i data-feather="mail"></i> Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject"><i data-feather="tag"></i> Subject *</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message"><i data-feather="message-square"></i> Message *</label>
+                            <textarea id="message" name="message" rows="6" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-success btn-large">
+                            <i data-feather="send"></i>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="./assets/logo.svg" alt="Learnza">
+                        <span>Learnza E-Library</span>
+                    </div>
+                    <p>Your trusted digital learning companion for academic excellence.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="./">Library</a></li>
+                        <li><a href="./about.html">About</a></li>
+                        <li><a href="./contact.html">Contact</a></li>
+                        <li><a href="./privacy.html">Privacy</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="./admin.html">Admin Panel</a></li>
+                        <li><a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Back to Top</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Learnza E-Library. All rights reserved.</p>
+                <p>Made with ❤️ by <a href="https://github.com/gohardev260">Gohar Rehman</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="toast" class="toast"></div>
+</body>
+
+</html>

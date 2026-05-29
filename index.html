@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light only">
+    <meta name="theme-color" content="#10b981">
+    <meta name="description"
+        content="Access a comprehensive digital library of educational notes, resources, and materials. Search, filter, and download high-quality academic content.">
+    <title>Learnza E‑Library — Your Digital Learning Hub</title>
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Feather Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/feather-icons@4.29.0/dist/feather.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.29.0/dist/feather.min.js"></script>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="./css/styles.css">
+
+    <!-- Scripts -->
+    <script type="module" src="./js/main.js" defer></script>
+</head>
+
+<body>
+    <!-- Loading overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p>Loading library...</p>
+    </div>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="./" class="logo">
+                <img src="./assets/logo.svg" alt="Learnza">
+                <div class="logo-content">
+                    <span class="logo-title">Learnza</span>
+                    <span class="logo-subtitle">E-Library</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="header-nav desktop-nav">
+                <a href="./" class="nav-link active">
+                    <i data-feather="home"></i>
+                    <span>Library</span>
+                </a>
+                <a href="./about.html" class="nav-link">
+                    <i data-feather="info"></i>
+                    <span>About</span>
+                </a>
+                <a href="./contact.html" class="nav-link">
+                    <i data-feather="mail"></i>
+                    <span>Contact</span>
+                </a>
+                <a href="./privacy.html" class="nav-link">
+                    <i data-feather="shield"></i>
+                    <span>Privacy</span>
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav" id="mobileNav">
+            <div class="mobile-nav-content">
+                <a href="./" class="mobile-nav-item active">
+                    <i data-feather="home"></i>
+                    <span>Library</span>
+                </a>
+                <a href="./about.html" class="mobile-nav-item">
+                    <i data-feather="info"></i>
+                    <span>About</span>
+                </a>
+                <a href="./contact.html" class="mobile-nav-item">
+                    <i data-feather="mail"></i>
+                    <span>Contact</span>
+                </a>
+                <a href="./privacy.html" class="mobile-nav-item">
+                    <i data-feather="shield"></i>
+                    <span>Privacy</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Your Digital Learning Hub</h1>
+                    <p class="hero-subtitle">Access thousands of educational notes and resources. Search, download, and
+                        excel in your studies.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <!-- Search and Filters -->
+            <section class="search-panel card">
+                <div class="search-main">
+                    <div class="search-field">
+                        <i data-feather="search" class="search-icon"></i>
+                        <input type="text" id="searchInput" placeholder="Search for notes, topics, or subjects..."
+                            autocomplete="off">
+                        <button class="search-clear hidden" id="clearSearch" aria-label="Clear">
+                            <i data-feather="x"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="filters">
+                    <div class="filter-group">
+                        <label for="categoryFilter">
+                            <i data-feather="bookmark"></i>
+                            Category
+                        </label>
+                        <select id="categoryFilter">
+                            <option value="">All Categories</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="tagsFilter">
+                            <i data-feather="tag"></i>
+                            Tags
+                        </label>
+                        <input type="text" id="tagsFilter" placeholder="e.g., math, science" autocomplete="off">
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="sortFilter">
+                            <i data-feather="filter"></i>
+                            Sort by
+                        </label>
+                        <select id="sortFilter">
+                            <option value="created_at">Newest First</option>
+                            <option value="title">Title A-Z</option>
+                            <option value="downloads">Most Downloaded</option>
+                            <option value="views">Most Viewed</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-actions">
+                        <button class="btn btn-outline" id="resetFilters">
+                            <i data-feather="refresh-cw"></i>
+                            Reset
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section">
+                <div id="resultsMeta" class="results-meta hidden">
+                    <div class="results-count"></div>
+                </div>
+
+                <!-- Notes Grid -->
+                <div id="notesGrid" class="notes-grid"></div>
+
+                <!-- Empty State -->
+                <div id="emptyState" class="empty-state hidden">
+                    <div class="empty-icon">
+                        <i data-feather="search"></i>
+                    </div>
+                    <h3>No notes found</h3>
+                    <p>Try adjusting your search or filters to find what you're looking for.</p>
+                    <button class="btn btn-success" id="resetEmpty">
+                        <i data-feather="refresh-cw"></i>
+                        Reset Filters
+                    </button>
+                </div>
+
+                <!-- Pagination -->
+                <div id="pagination" class="pagination"></div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="./assets/logo.svg" alt="Learnza">
+                        <span>Learnza E-Library</span>
+                    </div>
+                    <p>Your trusted digital learning companion for academic excellence.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="./">Library</a></li>
+                        <li><a href="./about.html">About</a></li>
+                        <li><a href="./contact.html">Contact</a></li>
+                        <li><a href="./privacy.html">Privacy</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="./admin.html">Admin Panel</a></li>
+                        <li><a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Back to Top</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Learnza E-Library. All rights reserved.</p>
+                <p>Made with ❤️ by <a href="https://github.com/gohardev260">Gohar Rehman</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast notifications -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Note Card Template -->
+    <template id="noteCardTemplate">
+        <div class="note-card">
+            <div class="note-image"></div>
+
+            <div class="note-content">
+                <div class="note-header">
+                    <h3 class="note-title"></h3>
+                    <span class="category-badge"></span>
+                </div>
+
+                <p class="note-description"></p>
+
+                <div class="note-tags"></div>
+
+                <div class="note-footer">
+                    <div class="note-stats">
+                        <span class="stat">
+                            <i data-feather="eye"></i>
+                            <span class="views-count">0</span>
+                        </span>
+                        <span class="stat">
+                            <i data-feather="download"></i>
+                            <span class="downloads-count">0</span>
+                        </span>
+                    </div>
+
+                    <div class="note-actions">
+                        <a class="btn btn-outline preview-btn" target="_blank" title="Preview">
+                            <i data-feather="eye"></i>
+                        </a>
+                        <button class="btn btn-success download-btn" title="Download">
+                            <i data-feather="download"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+</body>
+
+</html>
