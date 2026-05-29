@@ -1,26 +1,24 @@
-# Welcome to Learnza 2.0 📚
-
-![Learnza Banner](assets/logo.svg)
+# Welcome to Learnza
 
 > **"Your trusted digital learning companion for academic excellence."**
 
-Use Learnza 2.0 to transform how students access educational resources. We've rebuilt the entire platform from the ground up to be faster, smarter, and more reliable. It's not just a file repository; it's a fully-featured Digital Library Application designed with modern web standards in mind.
+Use Learnza to transform how students access educational resources. We've rebuilt the entire platform from the ground up to be faster, smarter, and more reliable. It's not just a file repository; it's a fully-featured Digital Library Application designed with modern web standards in mind.
 
 ---
 
-## 🌟 What Makes This Special?
+## What Makes This Special?
 
-We didn't just update the old site; we re-engineered it. Here is why Learnza 2.0 stands out:
+We didn't just update the old site; we re-engineered it. Here is why Learnza stands out:
 
-### ⚡ **Blazing Fast Performance**
+### Blazing Fast Performance
 Built on a **JAMstack architecture**, the site loads instantly. We stripped away heavy frameworks in favor of optimized Vanilla JavaScript and CSS, ensuring it runs smoothly on everything from high-end laptops to budget smartphones.
 
-### �️ **Robust Download System (The "Secret Sauce")**
+### Robust Download System (The "Secret Sauce")
 One of the biggest challenges in web development is handling cross-origin downloads securely.
 - **The Problem**: Browsers often block downloading files from external servers (like Archive.org) due to CORS policies, or they try to open PDFs instead of saving them.
 - **Our Solution**: We engineered a custom **Cloudflare Worker** that acts as a secure proxy. This "middleman" grabs the file for you and hands it over with the correct permission headers, ensuring a smooth, direct download every single time—no broken links, no preview errors.
 
-### 👮 **Secure Admin Dashboard**
+### Secure Admin Dashboard
 Managing content shouldn't be a headache. Our custom admin panel lets you:
 - **Create & Edit** notes with a rich interface.
 - **Track Stats** like views and downloads in real-time.
@@ -29,9 +27,11 @@ Managing content shouldn't be a headache. Our custom admin panel lets you:
 
 ---
 
-## 🏗️ Under the Hood: The Tech Stack
+## Under the Hood: The Tech Stack
 
 We chose technologies that offer the best balance of performance, cost (free tier friendly!), and scalability.
+
+
 
 | Component | Technology | Why We Chose It |
 |-----------|------------|-----------------|
@@ -42,12 +42,12 @@ We chose technologies that offer the best balance of performance, cost (free tie
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 Here's how the project is organized, so you know exactly where to find things:
 
 ```bash
-Learnza 2.0/
+Learnza/
 ├── assets/             # Images, icons, and logo.svg
 ├── css/                
 │   ├── admin.css       # Styles specifically for the Admin Dashboard
@@ -66,13 +66,12 @@ Learnza 2.0/
 ├── admin.html          # Secure Admin Dashboard
 ├── contact.html        # Contact Page (Netlify Forms integrated)
 ├── download.html       # Dedicated download progress page
-├── cloudflare-worker.js # The code for our custom Proxy Server
 └── README.md           # This documentation!
 ```
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 Want to run this project yourself? Here is how to get it up and running on your local machine.
 
@@ -86,10 +85,10 @@ Since this is a static site, it's super easy to launch.
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/learnza-2.0.git
+git clone https://github.com/gohardev260/Learnza-E-Library
 
 # Navigate into the folder
-cd learnza-2.0
+cd Learnza-E-Library
 
 # Open index.html in your browser, or use a local server
 # (Using Python's built-in server as an example)
@@ -106,19 +105,19 @@ The app needs a backend to store your notes.
 
 ### 3. Setup the Download Proxy
 To make downloads work perfectly:
-1. Sign up for [Cloudflare Workers](https://workers.cloudflare.com/) (it's free!).
+1. Sign up for [Cloudflare Workers](https://cloudflare.com) (it's free!).
 2. Create a new Service.
-3. Paste the code from `cloudflare-worker.js`.
+3. Paste the code for worker from.
 4. Deploy it and copy your new Worker URL.
-5. Update `js/downloader.js` with your URL: `const PROXY_URL = 'https://your-worker.workers.dev/?url=';`.
+5. Update `js/downloader.js` with your URL: `const PROXY_URL = 'https://workers.dev';`.
 
 ---
 
-## � Deployment Guide
+## Deployment Guide
 
 ### Deploying the Website
 We recommend **Netlify** for hosting.
-1. Log in to Netlify and drag-and-drop your `Learnza 2.0` folder.
+1. Log in to Netlify and drag-and-drop your `Learnza` folder.
 2. That's it! Netlify will automatically detect our forms and start collecting submissions.
 
 ### The Contact Form
@@ -129,7 +128,7 @@ You don't need a backend server for the contact form! We used **Netlify Forms**,
 
 ---
 
-## 🔒 Security Measures
+## Security Measures
 
 We take security seriously.
 - **No Private Keys in Code**: The frontend only uses public ("Anon") keys.
@@ -138,11 +137,17 @@ We take security seriously.
 
 ---
 
-## 📞 Need Help?
+## Need Help?
 
 If you run into issues or have questions about the codebase, feel free to reach out via the contact form on the live site.
 
-Happy Coding! ❤️
+Happy Coding!
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 &copy; 2026 Learnza E-Library. Maintained by Gohar Rehman.
